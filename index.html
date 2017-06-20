@@ -1,0 +1,38 @@
+<!doctype html>
+<h1>Count Contributions!</h1>
+<p>Lists PRs landed in a list of repos in a given time frame.
+<p>You'll have to manually check if contributors are organization
+members or known collaborators; automating that check requires
+push access, which this tool won't ask for.
+<form id="formy" action="lolwut">
+  <label for="startDate">Start Date</label>
+  <input type="date" id="startDate" name="startDate">
+  <label for="endDate">End Date</label>
+  <input type="date" id="endDate" name="endDate">
+  <label for="textarea">Enter repos, one per line, in :owner/:repo form</label>
+  <textarea name="textarea"
+   rows="10" cols="50">mozilla/testpilot</textarea>
+  <input type="submit" value="Get contribs">
+</form>
+<div id="results">Results will show up here...</div>
+<script type="text/javascript">
+// Wait till the document is ready...
+function pollForDocumentReady() {
+  if (document.readyState === 'complete') {
+    attachHandler();
+  } else {
+    setTimeout(pollForDocumentReady, 250);
+  }
+}
+
+function attachHandler() {
+  const frm = document.querySelector("formy");
+  frm.addEventListener('submit', onSubmit);
+}
+
+function onSubmit(evt) {
+  evt.preventDefault();
+  evt.stopPropagation();
+  // TODO: move index.js into here, once it works with the browser-supported library.
+}
+</script>
